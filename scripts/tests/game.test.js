@@ -33,9 +33,17 @@ const { game, newGame } = require("../game");
 describe("newGame works correctly", () => {
     beforeAll(() => {
         game.score = 42;
+        game.playerMove = [1,2,3,4]
+        game.currentGame = [1,2,3,4]
         newGame();
     });
-    test("Should set the scote to zero", () =>{
+    test("Should set the score to zero", () =>{
         expect(game.score).toEqual(0);
+    })
+    test("Should set the playerMove to zero", () =>{
+        expect(game.playerMove).toEqual([]);
+    })
+    test("Should set the currentGame to zero", () =>{
+        expect(game.currentGame).toEqual([]);
     })
 });
