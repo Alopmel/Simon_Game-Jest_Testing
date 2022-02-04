@@ -20,4 +20,10 @@
      test("currentGame key exists", () => {
         expect("currentGame" in game).toBe(true);
     });
+    test("playerMove key exists", () => {
+        expect("playerMove" in game).toBe(true);
+    });
+    test("choices key exists", () => {
+        expect("choices" in game).toBe(true);
+    });
  });
