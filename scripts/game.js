@@ -23,6 +23,18 @@ function addTurn(){
     
 }
 
+function showTurns() {
+    game.turnNumber = 0;
+    let turns = setInterval(function () {
+        lightsOn(game.currentGame[game.turnNumber]);
+        game.turnNumber++;
+        if (game.turnNumber >= game.currentGame.length) {
+            clearInterval(turns);
+        }
+    }, 800);
+}
+
+
 function lightsOn(circ) {
     document.getElementById(circ).classList.add(circ + "light");
     setTimeout(function () {
@@ -30,4 +42,4 @@ function lightsOn(circ) {
     }, 400);
 }
 
-module.exports = { game, newGame, showScore, addTurn, lightsOn};
+module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns};
