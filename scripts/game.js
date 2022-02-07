@@ -1,26 +1,35 @@
 let game = {
-    score: 0,
     currentGame: [],
-    playerMove: [],
-    choices: ["button1","button2","button3","button4"],
+    playerMoves: [],
+    score: 0,
+    turnNumber: 0,
+    choices: ["button1", "button2", "button3", "button4"]
 };
 
 function newGame() {
-    game.score = 0;
     game.currentGame = [];
-    game.playerMove = [];
+    game.playerMoves = [];
+    game.score = 0;
+
+    for (let circle of document.getElementsByClassName("circle")) {
+        if (circle.getAttribute("data-listener") !== "true") {
+            circle.addEventListener("click", (e) => {
+                let move = e.target.getAttribute("id");
+                lightsOn(move);
+                game.playerMoves.push(move);
+                playerTurn();
+            });
+            circle.setAttribute("data-listener", "true");
+        }
+    }
     showScore();
     addTurn();
 }
 
-function showScore(){
-    document.getElementById("score").innerText = game.score
-}
-
-function addTurn(){
-    game.playerMove = [];
-    game.currentGame.push(game.choices[(Math.floor(Math.random() * 4 ))]);
-    
+function addTurn() {
+    game.playerMoves = [];
+    game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
+    showTurns();
 }
 
 function showTurns() {
@@ -34,7 +43,6 @@ function showTurns() {
     }, 800);
 }
 
-
 function lightsOn(circ) {
     document.getElementById(circ).classList.add(circ + "light");
     setTimeout(function () {
@@ -42,4 +50,8 @@ function lightsOn(circ) {
     }, 400);
 }
 
-module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns};
+function showScore() {
+    document.getElementById("score").innerText = game.score;
+}
+
+module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns };
